@@ -240,19 +240,19 @@ function start() {
 
     localStorage.setItem('gamestats', JSON.stringify(gamestats))
 
-    const container = document.createElement('article')
-    container.classList.add('gameInfo')
-    const image = document.createElement('img')
-    image.src = currentMessage.image
-    const gameName = document.createElement('p')
-    gameName.textContent = currentMessage.game
-
-    container.append(image, gameName)
-    question.append(container)
+    showGame()
   }
 
   function handleSkip(e) {
     gamestats.skips--
+
+    const correctEl = document.querySelector(`#options [value="${correctUser}"]`)
+    correctEl.classList.add('correct')
+
+
+    if (!document.querySelector('.gameInfo')) {
+      showGame()
+    }
 
     if (gamestats.skips <= 0) {
       e.target.remove()
@@ -268,7 +268,10 @@ function start() {
 
     // remove item from memory
     localStorage.removeItem('currentMessage')
-    playRound()
+
+    setTimeout(() => {
+      playRound()
+    }, 3000)
   }
 
   function handleOptionClick(e) {
@@ -327,6 +330,8 @@ function start() {
 
         if (obj.message.startsWith('@') && ignoreReplies) return false
 
+        if (obj.username === correctUser) return false
+
         return true
       })
 
@@ -361,6 +366,18 @@ function start() {
     console.log('CHEATER! the correct user is', correctUser)
   }
 
+  function showGame() {
+    const container = document.createElement('article')
+    container.classList.add('gameInfo')
+    const image = document.createElement('img')
+    image.src = currentMessage.image
+    const gameName = document.createElement('p')
+    gameName.textContent = currentMessage.game
+
+    container.append(image, gameName)
+    question.append(container)
+  }
+
   function answerCorrect (correctEl) {
     // TODO: make a more "intense" correct sfx whenever the hiscore is broken
     const audio = new Audio('sounds/correct.mp3')
@@ -376,6 +393,10 @@ function start() {
 
     // mark it as correct
     correctEl.classList.add('correct')
+
+    if (!document.querySelector('.gameInfo')) {
+      showGame()
+    }
 
     // remove item from memory
     localStorage.removeItem('currentMessage')
@@ -393,6 +414,11 @@ function start() {
 
     wrongEl.classList.add('incorrect')
     correctEl.classList.add('correct')
+
+
+    if (!document.querySelector('.gameInfo')) {
+      showGame()
+    }
 
     // remove item from memory
     localStorage.removeItem('currentMessage')
