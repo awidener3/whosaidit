@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./lib/papaparse.min.js" defer></script>
+  <script src="./script.js" defer></script>
+  <title>Who Said It?</title>
+</head>
+<body>
+
+  <section id="game-area">
+    <header>
+      <h1>Who Said It?</h1>
+      <button id="home">
+        <svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 32 32"><path fill="white" d="m30.814 13.051-14.001-12a1.248 1.248 0 0 0-1.628.002l.002-.001-14 12c-.268.23-.437.57-.437.948v16.001c0 .69.56 1.25 1.25 1.25h28a1.252 1.252 0 0 0 1.25-1.25v-16c0-.379-.168-.718-.434-.948l-.002-.001zM12.25 28.75V24a3.75 3.75 0 0 1 7.5 0v4.75zm16.5 0h-6.5V24a6.25 6.25 0 1 0-12.5 0v4.75h-6.5V14.575L16 3.646l12.75 10.929z" /></svg>
+      </button>
+    </header>
+
+    <section id="upload">
+      <p class="hiscore">Hi-score: <span></span></p>
+
+      <div>
+        <label for="csvFile">Select your file</label>
+        <input type="file" accept=".csv" id="csvFile">
+        <p>Total messages: <span id="messageCount">0</span></p>
+
+        <hr>
+
+        <label for="minWords">Min. words <input type="number" name="minWords" id="minWords" min="3" value="5"></label>
+
+        <label for="ignoreReplies"><input type="checkbox" name="ignoreReplies" id="ignoreReplies"> Ignore @ replies</label>
+      </div>
+
+      <menu id="gameControls">
+        <li><button id="play">Play!</button></li>
+        <li><button id="reset">Reset</button></li>
+      </menu>
+    </section>
+
+    <section id="game">
+      <h2 id="question"></h2>
+
+      <menu id="options">
+        <li><button id="option1" class="option"></button></li>
+        <li><button id="option2" class="option"></button></li>
+        <li><button id="option3" class="option"></button></li>
+        <li><button id="option4" class="option"></button></li>
+      </menu>
+
+      <menu id="lifelines"></menu>
+
+      <p id="scoreboard">Score: <span id="score">0</span> | Hi-Score: <span id="hiscore">0</span></p>
+    </section>
+  </section>
+
+  <footer>
+    Inspired by <a href="https://www.twitch.tv/wolvesatmydoor">@wolvesatmydoor</a>, coded by <a href="https://www.twitch.tv/riotattherite">@RiotAtTheRite</a> for <a href="https://www.twitch.tv/alyssasketches">@alyssasketches</a> 💜
+  </footer>
+</body>
+</html>
